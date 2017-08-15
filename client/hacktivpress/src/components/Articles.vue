@@ -5,6 +5,9 @@
       <div v-for="article in articles" class="list-group-item">
         <h4 class="list-group-item-heading">{{article.title}}</h4>
         <p class="list-group-item-text">ini ....</p>
+
+          <router-link :to="{ name: 'Details', params: { id: article._id } }"><button class="btn btn-info" type="button" name="button">Details</button></router-link>
+
       </div>
     </div>
   </div>

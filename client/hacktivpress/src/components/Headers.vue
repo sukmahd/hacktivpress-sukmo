@@ -7,8 +7,8 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" data-toggle="modal" data-target="#myModal">Login or Join</a></li>
-          <li><a href="#">Hai, {{username}}</a></li>
+          <li v-if="getUser"><a href="#">Hai, {{getUser}} | Logout</a></li>
+          <li v-else ><a href="#" data-toggle="modal" data-target="#myModal">Login or Join</a></li>
         </ul>
       </div>
     </div>

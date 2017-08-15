@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const initialState = {
   articles: [],
   article: '',
-  username: ''
+  username: '',
+  id: ''
 }
 
 export default new Vuex.Store({
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setUser (state, payload) {
       state.username = payload
+    },
+    setId (state, payload) {
+      state.id = payload
     }
   },
   actions: {
@@ -68,7 +72,9 @@ export default new Vuex.Store({
       })
       .then(response => {
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('id', response.data.id)
         commit('setUser', response.data.username)
+        commit('setId', response.data.id)
         console.log(response)
       })
       .catch(err => {
