@@ -7,8 +7,8 @@ Vue.use(Vuex)
 const initialState = {
   articles: [],
   article: '',
-  username: '',
-  id: ''
+  username: localStorage.getItem('username'),
+  id: localStorage.getItem('id')
 }
 
 export default new Vuex.Store({
@@ -30,6 +30,11 @@ export default new Vuex.Store({
     },
     setId (state, payload) {
       state.id = payload
+    },
+    clearState (state) {
+      state.id = ''
+      state.username = ''
+      localStorage.clear()
     }
   },
   actions: {
@@ -71,10 +76,13 @@ export default new Vuex.Store({
         password: payload.password
       })
       .then(response => {
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('id', response.data.id)
-        commit('setUser', response.data.username)
-        commit('setId', response.data.id)
+        if (response.data) {
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('id', response.data.id)
+          localStorage.setItem('username', response.data.username)
+          commit('setUser', response.data.username)
+          commit('setId', response.data.id)
+        }
         console.log(response)
       })
       .catch(err => {
@@ -92,6 +100,9 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+    logout ({ commit }) {
+      commit('clearState')
     }
   }
 })

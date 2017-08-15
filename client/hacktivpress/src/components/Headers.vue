@@ -7,7 +7,7 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li v-if="getUser"><a href="#">Hai, {{getUser}} | Logout</a></li>
+          <li v-if="getUser"><a  @click="keluar" href="#">Hai, {{getUser}} | Logout</a></li>
           <li v-else ><a href="#" data-toggle="modal" data-target="#myModal">Login or Join</a></li>
         </ul>
       </div>
@@ -18,6 +18,7 @@
 
 <script>
 import Modal from '@/components/Modal'
+import { mapActions } from 'vuex'
 export default {
   components: {
     Modal
@@ -25,6 +26,14 @@ export default {
   computed: {
     getUser () {
       return this.$store.state.username
+    }
+  },
+  methods: {
+    ...mapActions([
+      'logout'
+    ]),
+    keluar () {
+      this.logout()
     }
   }
 }
