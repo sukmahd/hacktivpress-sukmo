@@ -9,7 +9,8 @@ function register(req,res){
   const pass = helper.hash(req.body.password, key)
   User.create({
     username: req.body.username,
-    password: pass
+    password: pass,
+    key: key
   })
   .then(response => {
     res.send(response)
