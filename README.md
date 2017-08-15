@@ -19,6 +19,11 @@ List of user routes:
 
 ##RUN API server
 
+cd server
+
 npm install
 
 npm start
+
+for client side Read Readme in
+cd client

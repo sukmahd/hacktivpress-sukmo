@@ -5,9 +5,10 @@
       <div v-for="article in articles" class="list-group-item">
         <h4 class="list-group-item-heading">{{article.title}}</h4>
         <p class="list-group-item-text">ini ....</p>
+        <p>By: {{article.author.username}}</p>
 
           <router-link :to="{ name: 'Details', params: { id: article._id } }"><button class="btn btn-info" type="button" name="button">Details</button></router-link>
-
+          <button v-if="user == article.author._id" class="btn btn-danger" type="button" @click="deleteArt(article._id)" name="button">Delete</button>
       </div>
     </div>
   </div>
@@ -23,12 +24,19 @@ export default {
   computed: {
     articles () {
       return this.$store.state.articles
+    },
+    user () {
+      return this.$store.state.id
     }
   },
   methods: {
     ...mapActions([
-      'getAllArticles'
-    ])
+      'getAllArticles',
+      'deleteArticle'
+    ]),
+    deleteArt (id) {
+      this.deleteArticle(id)
+    }
   },
   created () {
     this.getAllArticles()

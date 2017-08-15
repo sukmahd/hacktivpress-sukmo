@@ -7,7 +7,7 @@ const middleware = require('../helpers/auth')
 
 router.get('/', controller.getAllArticles)
 router.get('/:id', controller.getOneArticle)
-router.post('/', middleware.auth, controller.postArticle)
+router.post('/', controller.postArticle)
 router.delete('/:id',  middleware.auth, controller.deleteArticle)
 router.put('/:id',  middleware.auth, controller.editArticle)
 router.get('/category/:category', controller.getByCategory)

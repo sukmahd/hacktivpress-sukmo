@@ -5,6 +5,7 @@ const Article = require('../models/Article')
 
 function getAllArticles(req,res){
   Article.find()
+  .populate('author', 'username _id')
   .then(response => {
     res.send(response)
   })

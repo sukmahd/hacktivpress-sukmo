@@ -35,6 +35,13 @@ export default new Vuex.Store({
       state.id = ''
       state.username = ''
       localStorage.clear()
+    },
+    setNewData (state, id) {
+      const newData = state.articles.filter(function (article) {
+        return article._id !== id
+      })
+
+      state.articles = newData
     }
   },
   actions: {
@@ -103,6 +110,33 @@ export default new Vuex.Store({
     },
     logout ({ commit }) {
       commit('clearState')
+    },
+    deleteArticle ({ commit }, id) {
+      axios.delete(`http://localhost:3000/articles/${id}`, {
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+      .then(response => {
+        console.log(response)
+        commit('setNewData', id)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    editArticl ({ commit }, payload) {
+      axios.edit(`http://localhost:3000/articles/${payload.id}`, {
+        title: payload.title,
+        content: payload.content,
+        category: payload.category
+      })
+      .then(response => {
+        console.log('edited')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 })
