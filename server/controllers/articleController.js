@@ -67,10 +67,36 @@ function deleteArticle(req,res){
   })
 }
 
+function getByAuthor(req,res){
+  Article.find({
+    author: req.params.author
+  })
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
+
+function getByCategory(req,res){
+  Article.find({
+    category: req.params.category
+  })
+  .then(response => {
+    res.send(response)
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
+
 module.exports = {
   getAllArticles,
   getOneArticle,
   deleteArticle,
   postArticle,
-  editArticle
+  editArticle,
+  getByAuthor,
+  getByCategory
 };
