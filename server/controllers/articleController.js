@@ -14,7 +14,7 @@ function getAllArticles(req,res){
 }
 
 function getOneArticle(req,res){
-  Article.findOne(req.params.id)
+  Article.findById(req.params.id)
   .then(response => {
     res.send(response)
   })
@@ -45,7 +45,7 @@ function editArticle(req,res) {
   .update({
     title: req.body.title,
     content: req.body.content,
-    category: req,body.category
+    category: req.body.category
   })
   .then(response => {
     res.send(response)
